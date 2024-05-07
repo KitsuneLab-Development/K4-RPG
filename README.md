@@ -41,6 +41,19 @@ Your support keeps my creative engine running and allows me to share knowledge w
 </a>
 </p>
 
+<!-- Skills -->
+
+## Skill Module List
+
+- [**Health Module**](https://github.com/K4ryuu/K4-RPG-Health): Extra health skill
+- [**Armor Module**](https://github.com/K4ryuu/K4-RPG-Armor): Extra armor skill
+- [**Health Regeneration Module**](https://github.com/K4ryuu/K4-RPG-HealthRegen): Health regeneration skill
+- [**Armor Regeneration Module**](https://github.com/K4ryuu/K4-RPG-ArmorRegen): Armor regeneration skill
+- [**Shot Damage Multiplier (Linux Only)**](https://github.com/K4ryuu/K4-RPG-ShotDamageMultiplier): Damage multiplier skill for shots
+- [**Knife Damage Multiplier (Linux Only)**](https://github.com/K4ryuu/K4-RPG-KnifeDamageMultiplier): Damage multiplier skill for knife damages
+- [**Thorns (Reflect damage)**](https://github.com/K4ryuu/K4-RPG-Thorns): Damage reflect skill
+- [**Vampire (Steal health)**](https://github.com/K4ryuu/K4-RPG-Vampire): Health steal skill
+  
 <!-- ROADMAP -->
 
 ## Roadmap
