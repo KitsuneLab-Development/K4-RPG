@@ -1,59 +1,117 @@
 ﻿
+using System.Text.Json.Serialization;
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes;
 using CounterStrikeSharp.API.Core.Capabilities;
-using CounterStrikeSharp.API.Modules.Timers;
 using K4RPGSharedApi;
 using Microsoft.Extensions.Logging;
 
-namespace K4RPGSkillExample;
-
-[MinimumApiVersion(205)]
-public class PluginK4RPGSkillExample : BasePlugin
+namespace K4RPGSkillHealth
 {
-	public override string ModuleName => "K4-RPG Addon - Health";
-	public override string ModuleAuthor => "K4ryuu";
-	public override string ModuleVersion => "1.0.0";
-
-	public static PluginCapability<IK4RPGSharedApi> Capability_SharedAPI { get; } = new("k4-rpg:sharedapi");
-	public override void OnAllPluginsLoaded(bool hotReload)
+	public sealed class PluginConfig : BasePluginConfig
 	{
-		IK4RPGSharedApi? checkAPI = Capability_SharedAPI.Get();
+		[JsonPropertyName("load-notifications")]
+		public bool LoadNotifications { get; set; } = true;
 
-		if (checkAPI != null)
+		[JsonPropertyName("level-settings")]
+		public Dictionary<int, LevelSettings> LevelSettings { get; set; } = new Dictionary<int, LevelSettings>
 		{
-			// This registers the new skill with the unique ID, name, description, max level, level prices, apply function, from level, and is VIP
-			checkAPI.RegisterSkill("k4-rpg_health", "Health", "Gives you extra health points in every round", 5, new Dictionary<int, int> { { 1, 2 }, { 2, 5 }, { 3, 8 }, { 4, 10 }, { 5, 15 } }, (player, level) =>
-			{
-				Server.NextFrame(() =>
-				{
-					if (player.PlayerPawn.Value != null)
-					{
-						player.PlayerPawn.Value.Health += 1 * level;
-						Utilities.SetStateChanged(player, "CBaseEntity", "m_iHealth");
+			{ 1, new LevelSettings { Health = 1, SkillPoints = 1 } },
+			{ 2, new LevelSettings { Health = 2, SkillPoints = 2 } },
+			{ 3, new LevelSettings { Health = 3, SkillPoints = 3 } },
+			{ 4, new LevelSettings { Health = 4, SkillPoints = 4 } },
+			{ 5, new LevelSettings { Health = 5, SkillPoints = 5 } }
+		};
 
-						Logger.LogInformation($"Player {player.PlayerName} has been given {1 * level} health points.");
-					}
-				});
-			}, 0, false);
-
-			Logger.LogInformation("Skill 'Health' has been registered.");
-		}
-		else
-			throw new Exception("Failed to get shared API capability for K4-RPG.");
+		[JsonPropertyName("ConfigVersion")]
+		public override int Version { get; set; } = 1;
 	}
 
-	public override void Unload(bool hotReload)
+	public class LevelSettings
 	{
-		IK4RPGSharedApi? checkAPI = Capability_SharedAPI.Get();
+		[JsonPropertyName("health")]
+		public int Health { get; set; }
 
-		if (checkAPI != null)
+		[JsonPropertyName("skill-points")]
+		public int SkillPoints { get; set; }
+	}
+
+	[MinimumApiVersion(227)]
+	public class PluginK4RPGSkillHealth : BasePlugin, IPluginConfig<PluginConfig>
+	{
+		// ** Skill Settings ** //
+		public static string SkillName = "Health";
+		public static string SkillUniqueID = "k4-rpg_health";
+		public static string SkillDescription = "Gives you extra health points in every round";
+		public static int SkillFromLevel = 0;
+		public static bool SkillIsVIP = false;
+
+		// ** Plugin Settings ** //
+		public override string ModuleName => $"K4-RPG Addon - {SkillName}";
+		public override string ModuleAuthor => "K4ryuu";
+		public override string ModuleVersion => "1.0.0";
+
+		// ** Plugin Variables ** //
+		public required PluginConfig Config { get; set; } = new PluginConfig();
+		public static PluginCapability<IK4RPGSharedApi> Capability_SharedAPI { get; } = new("k4-rpg:sharedapi");
+
+		// ** Register Skill ** //
+		public override void OnAllPluginsLoaded(bool hotReload)
 		{
-			// Unregister the skill
-			checkAPI.UnregisterSkill("k4-rpg_health");
+			IK4RPGSharedApi? checkAPI = Capability_SharedAPI.Get();
+
+			if (checkAPI != null)
+			{
+				Dictionary<int, int> prices = new Dictionary<int, int>();
+				foreach (var levelSetting in Config.LevelSettings)
+				{
+					prices.Add(levelSetting.Key, levelSetting.Value.SkillPoints);
+				}
+
+				checkAPI.RegisterSkill(SkillUniqueID, SkillName, SkillDescription, Config.LevelSettings.Keys.Max(), prices, (player, level) =>
+				{
+					Server.NextFrame(() =>
+					{
+						if (player.PlayerPawn.Value != null)
+						{
+							int healthPoints = Config.LevelSettings[level].Health;
+							player.PlayerPawn.Value.Health += healthPoints;
+							Utilities.SetStateChanged(player, "CBaseEntity", "m_iHealth");
+						}
+					});
+				}, SkillFromLevel, SkillIsVIP);
+
+				if (Config.LoadNotifications)
+					Logger.LogInformation($"Skill '{SkillName}' has been registered.");
+			}
+			else
+				throw new Exception("Failed to get shared API capability for K4-RPG.");
 		}
-		else
-			throw new Exception("Failed to get shared API capability for K4-RPG.");
+
+		// ** Unregister Skill ** //
+		public override void Unload(bool hotReload)
+		{
+			IK4RPGSharedApi? checkAPI = Capability_SharedAPI.Get();
+
+			if (checkAPI != null)
+			{
+				checkAPI.UnregisterSkill(SkillUniqueID);
+
+				if (Config.LoadNotifications)
+					Logger.LogInformation($"Skill '{SkillName}' has been unregistered.");
+			}
+			else
+				throw new Exception("Failed to get shared API capability for K4-RPG.");
+		}
+
+		// ** Configuration ** //
+		public void OnConfigParsed(PluginConfig config)
+		{
+			if (config.Version < Config.Version)
+				base.Logger.LogWarning("Configuration version mismatch (Expected: {0} | Current: {1})", this.Config.Version, config.Version);
+
+			this.Config = config;
+		}
 	}
 }
