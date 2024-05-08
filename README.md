@@ -53,7 +53,7 @@ Your support keeps my creative engine running and allows me to share knowledge w
 - [**Knife Damage Multiplier (Linux Only)**](https://github.com/K4ryuu/K4-RPG-KnifeDamageMultiplier): Damage multiplier skill for knife damages
 - [**Thorns (Reflect damage)**](https://github.com/K4ryuu/K4-RPG-Thorns): Damage reflect skill
 - [**Vampire (Steal health)**](https://github.com/K4ryuu/K4-RPG-Vampire): Health steal skill
-- [**Nade King**]https://github.com/K4ryuu/K4-RPG-NadeKing): Spawn grenate kits per level
+- [**Nade King**](https://github.com/K4ryuu/K4-RPG-NadeKing): Spawn grenate kits per level
 - [**Backstab Freeze (Linux Only)**](https://github.com/K4ryuu/K4-RPG-BackstabFreeze): Chance based freeze on backstab of an enemy
 - [**Speed**](https://github.com/K4ryuu/K4-RPG-Speed): Additional speed on every round
 - [**Knife Crits Skill (Linux Only)**](https://github.com/K4ryuu/K4-RPG-KnifeCrits): Chance based critical damage for knife hits with multipliers
