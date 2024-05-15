@@ -12,10 +12,13 @@ public sealed partial class Plugin : BasePlugin
 {
 	public int GetExperienceForLevel(int level)
 	{
+		if (level <= 1)
+			return 0;
+
 		int totalExperience = 0;
-		for (int i = 1; i < level; i++)
+		for (int i = 2; i <= level; i++)
 		{
-			totalExperience += (int)(Config.LevelSettings.BaseExperience * Math.Pow(i, Config.LevelSettings.ExperienceMultiplier));
+			totalExperience += (int)(Config.LevelSettings.BaseExperience * Math.Pow(i - 1, Config.LevelSettings.ExperienceMultiplier));
 		}
 
 		return totalExperience;
@@ -23,11 +26,14 @@ public sealed partial class Plugin : BasePlugin
 
 	public int GetLevelForExperience(long experience)
 	{
-		int level = 1;
-		long totalExperience = 0;
-		while (totalExperience < experience)
+		if (experience < Config.LevelSettings.BaseExperience)
+			return 1;
+
+		int level = 2;
+		long totalExperience = Config.LevelSettings.BaseExperience;
+		while (totalExperience <= experience)
 		{
-			totalExperience += (long)(Config.LevelSettings.BaseExperience * Math.Pow(level, Config.LevelSettings.ExperienceMultiplier));
+			totalExperience += (long)(Config.LevelSettings.BaseExperience * Math.Pow(level - 1, Config.LevelSettings.ExperienceMultiplier));
 			level++;
 		}
 

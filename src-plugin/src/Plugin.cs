@@ -44,6 +44,11 @@
             Initialize_Events();
             Initialize_Commands();
             Initialize_DynamicEvents();
+
+            if (hotReload)
+            {
+                Task.Run(LoadAllPlayersDataAsync);
+            }
         }
 
         public override void Unload(bool hotReload)
