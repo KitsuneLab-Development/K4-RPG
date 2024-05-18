@@ -10,7 +10,7 @@ namespace K4RPG
 
         public override string ModuleAuthor => "K4ryuu";
 
-        public override string ModuleVersion => "1.0.1 " +
+        public override string ModuleVersion => "1.0.2 " +
 #if RELEASE
             "(release)";
 #else

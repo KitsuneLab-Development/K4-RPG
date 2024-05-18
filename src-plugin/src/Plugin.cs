@@ -6,7 +6,7 @@
     using K4RPG.Models;
     using CounterStrikeSharp.API;
 
-    [MinimumApiVersion(200)]
+    [MinimumApiVersion(227)]
     public sealed partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     {
         //** ? PLUGIN GLOBALS */
@@ -46,9 +46,7 @@
             Initialize_DynamicEvents();
 
             if (hotReload)
-            {
-                Task.Run(LoadAllPlayersDataAsync);
-            }
+                LoadAllPlayersDataAsync();
         }
 
         public override void Unload(bool hotReload)
