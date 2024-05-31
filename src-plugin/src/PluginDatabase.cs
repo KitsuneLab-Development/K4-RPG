@@ -101,8 +101,8 @@ public sealed partial class Plugin : BasePlugin
 
 		string tablePrefix = Config.DatabaseSettings.TablePrefix;
 		string query = @$"
-        INSERT INTO `{tablePrefix}k4-rpg_players` (`SteamID`, `Level`, `LastSeen`)
-        SELECT @SteamID, 1, CURRENT_TIMESTAMP
+        INSERT INTO `{tablePrefix}k4-rpg_players` (`SteamID`, `LastSeen`)
+        SELECT @SteamID, CURRENT_TIMESTAMP
         FROM DUAL
         WHERE NOT EXISTS (
             SELECT 1
