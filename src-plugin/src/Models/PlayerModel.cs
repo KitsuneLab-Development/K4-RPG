@@ -76,8 +76,8 @@ public class RPGPlayer
 		string tablePrefix = Plugin.Config.DatabaseSettings.TablePrefix;
 
 		string insertOrUpdateQuery = @$"
-        INSERT INTO `{tablePrefix}k4-rpg_players` (`SteamID`, `Level`, `LastSeen`)
-        VALUES (@SteamID, 1, CURRENT_TIMESTAMP)
+        INSERT INTO `{tablePrefix}k4-rpg_players` (`SteamID`, `Experience`, `SkillPoints`, `LastSeen`)
+        VALUES (@SteamID, 0, 0, CURRENT_TIMESTAMP)
         ON DUPLICATE KEY UPDATE
             `LastSeen` = CURRENT_TIMESTAMP;";
 
