@@ -58,6 +58,6 @@ $RECYCLE.BIN/
 __MACOSX/
 
 # Remove dotnet normal build
-bin/
-obj/
+**/bin/
+**/obj/
 *.sln

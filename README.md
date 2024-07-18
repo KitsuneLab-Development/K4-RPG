@@ -45,17 +45,19 @@ Your support keeps my creative engine running and allows me to share knowledge w
 
 ## Skill Module List
 
-- [**Health**](https://github.com/K4ryuu/K4-RPG-Health): Extra health skill
-- [**Armor**](https://github.com/K4ryuu/K4-RPG-Armor): Extra armor skill
-- [**Health Regeneration**](https://github.com/K4ryuu/K4-RPG-HealthRegen): Health regeneration skill
-- [**Armor Regeneration**](https://github.com/K4ryuu/K4-RPG-ArmorRegen): Armor regeneration skill
-- [**Shot Damage Multiplier (Linux Only)**](https://github.com/K4ryuu/K4-RPG-ShotDamageMultiplier): Damage multiplier skill for shots
-- [**Knife Damage Multiplier (Linux Only)**](https://github.com/K4ryuu/K4-RPG-KnifeDamageMultiplier): Damage multiplier skill for knife damages
-- [**Thorns (Reflect damage)**](https://github.com/K4ryuu/K4-RPG-Thorns): Damage reflect skill
-- [**Vampire (Steal health)**](https://github.com/K4ryuu/K4-RPG-Vampire): Health steal skill
-- [**Nade King**](https://github.com/K4ryuu/K4-RPG-NadeKing): Spawn grenate kits per level
-- [**Backstab Freeze (Linux Only)**](https://github.com/K4ryuu/K4-RPG-BackstabFreeze): Chance based freeze on backstab of an enemy
-- [**Speed**](https://github.com/K4ryuu/K4-RPG-Speed): Additional speed on every round
+All listed modules can be found within the modules folder:
+
+- **Health**: Extra health skill
+- **Armor**: Extra armor skill
+- **Health Regeneration**: Health regeneration skill
+- **Armor Regeneration**: Armor regeneration skill
+- **Shot Damage Multiplier (Linux Only)**: Damage multiplier skill for shots
+- **Knife Damage Multiplier (Linux Only)**: Damage multiplier skill for knife damages
+- **Thorns (Reflect damage)**: Damage reflect skill
+- **Vampire (Steal health)**: Health steal skill
+- **Nade King**: Spawn grenade kits per level
+- **Backstab Freeze (Linux Only)**: Chance based freeze on backstab of an enemy
+- **Speed**: Additional speed on every round
 
 <!-- ROADMAP -->
 

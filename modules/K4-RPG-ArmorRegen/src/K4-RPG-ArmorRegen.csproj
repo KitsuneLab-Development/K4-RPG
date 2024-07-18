@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <PublishDir>./bin/K4-RPG-ArmorRegen/</PublishDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>K4_SharedApi</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CounterStrikeSharp.API" Version="*">
+      <PrivateAssets>none</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <Reference Include="K4RPGSharedApi">
+      <HintPath>/Users/sples/Projects/GitHub/K4-RPG/src-shared/K4-RPG-API.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>
