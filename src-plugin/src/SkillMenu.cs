@@ -1,5 +1,6 @@
 namespace K4RPG
 {
+	using CounterStrikeSharp.API;
 	using CounterStrikeSharp.API.Core;
 	using CounterStrikeSharp.API.Modules.Menu;
 	using K4RPG.Models;

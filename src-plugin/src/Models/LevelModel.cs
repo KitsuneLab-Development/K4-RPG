@@ -31,12 +31,12 @@ public sealed partial class Plugin : BasePlugin
 
 		int level = 2;
 		long totalExperience = Config.LevelSettings.BaseExperience;
-		while (totalExperience <= experience)
+		while (totalExperience < experience)
 		{
 			totalExperience += (long)(Config.LevelSettings.BaseExperience * Math.Pow(level - 1, Config.LevelSettings.ExperienceMultiplier));
 			level++;
 		}
 
-		return level - 1;
+		return Math.Min(level, Config.LevelSettings.MaxLevel);
 	}
 }

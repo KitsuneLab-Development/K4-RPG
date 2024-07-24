@@ -10,40 +10,42 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h1 align="center">KitsuneLab©</h1>
-  <h3 align="center">K4-RPG</h3>
-  <a align="center">A modular plugin that support to gain experience and upgrade skills. Using an open developer API to use any additional skill. Skills can be set as VIP too, so you could get some more VIP purchases haha</a>
-
+  <a href="https://github.com/KitsuneLab-Development/K4-RPG">
+    <img src="https://i.imgur.com/sej1ZzD.png" alt="Logo" width="400" height="256">
+  </a>
+  <h3 align="center">CounterStrike 2 Plugin Template</h3>
   <p align="center">
+    A modular RPG like plugin for CounterStrike 2 that supports gaining experience and upgrading skills for players.
     <br />
     <a href="https://github.com/KitsuneLab-Development/K4-RPG/releases">Download</a>
     ·
-    <a href="https://github.com/KitsuneLab-Development/K4-RPG/issues/new?assignees=KitsuneLab-Development&labels=bug&projects=&template=bug_report.md&title=%5BBUG%5D">Report Bug</a>
+    <a href="https://github.com/KitsuneLab-Development/K4-RPG/issues/new?assignees=KitsuneLab-Development&labels=bug&template=bug_report.md&title=%5BBUG%5D">Report Bug</a>
     ·
-    <a href="https://github.com/KitsuneLab-Development/K4-RPG/issues/new?assignees=KitsuneLab-Development&labels=enhancement&projects=&template=feature_request.md&title=%5BREQ%5D">Request Feature</a>
+    <a href="https://github.com/KitsuneLab-Development/K4-RPG/issues/new?assignees=KitsuneLab-Development&labels=enhancement&template=feature_request.md&title=%5BREQ%5D">Request Feature</a>
+     ·
+    <a href="https://kitsune-lab.com">Website</a>
+     ·
+    <a href="https://nests.kitsune-lab.com/tickets/create?department_id=2">Hire Us</a>
   </p>
 </div>
 
-### Support My Work
+<!-- ABOUT THE PROJECT -->
 
-I offer various ways to support my journey:
+## About The Project
 
-- 💬 **Request Private Paid Jobs:** Got a specific project in mind? Let's chat, and I'll provide a quote.
-- 🎁 **Subscribe to My Tiers:** Join one of my subscription tiers for exclusive benefits, early access to projects, and personalized support.
-- ☕ **Buy Me a Coffee:** One-time donations keep me motivated and my creativity flowing.
-- 💼 **Shop from My Paid Resources:** Explore and purchase resources I've crafted for private use.
+The project has several modules that can be used to add new skills to the game. Every skill can be set as VIP, so you could get some more VIP purchases also they are highly configurable per level. The plugin is using a database to store the player's data and the plugin is using a custom API to let anyone create their own skills easily.
 
-Your support keeps my creative engine running and allows me to share knowledge with the community. Thanks for being part of my journey.
+### Dependencies
 
-<p align="center">
-<a href="https://www.buymeacoffee.com/k4ryuu">
-<img src="https://img.buymeacoffee.com/button-api/?text=Support Me&emoji=☕&slug=k4ryuu&button_colour=FF5F5F&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00" />
-</a>
-</p>
+To use this server addon, you'll need the following dependencies installed:
 
-<!-- Skills -->
+- [**CounterStrikeSharp**](https://github.com/roflmuffin/CounterStrikeSharp/releases): CounterStrikeSharp allows you to write server plugins in C# for Counter-Strike 2/Source2/CS2.
 
-## Skill Module List
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Modules -->
+
+## Modules
 
 All listed modules can be found within the modules folder:
 
@@ -59,12 +61,25 @@ All listed modules can be found within the modules folder:
 - **Backstab Freeze (Linux Only)**: Chance based freeze on backstab of an enemy
 - **Speed**: Additional speed on every round
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- ROADMAP -->
 
 ## Roadmap
 
-- [ ] Create Skills that the community wants
-- [ ] Center Menu whenever its added to CSS
+- [ ] Create skills that the community wants
+- [ ] Create passive skills
+- [ ] Add center html menu whenever its added to CSS
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- AUTHORS -->
+
+## Authors
+
+- [**K4ryuu**](https://github.com/K4ryuu) - _Initial work_
+
+See also the list of [contributors](https://github.com/KitsuneLab-Development/K4-RPG/graphs/contributors) who participated in this project as an outside contributor.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -73,5 +88,13 @@ All listed modules can be found within the modules folder:
 ## License
 
 Distributed under the GPL-3.0 License. See `LICENSE.md` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+- **KitsuneLab Team** - [contact@kitsune-lab.com](mailto:contact@kitsune-lab.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

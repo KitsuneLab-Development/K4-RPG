@@ -34,7 +34,7 @@
             else
             {
                 base.Logger.LogError("Please setup your MySQL database settings in the configuration file!");
-                Server.ExecuteCommand($"css_plugins unload {Path.GetFileNameWithoutExtension(ModulePath)}");
+                Server.ExecuteCommand($"css_plugins unload {ModuleName}");
                 return;
             }
 

@@ -3,7 +3,7 @@ namespace K4RPG
 	using CounterStrikeSharp.API.Core;
 	using System.Text.Json.Serialization;
 
-	public sealed class PluginConfig : BasePluginConfig
+	public class PluginConfig : BasePluginConfig
 	{
 		[JsonPropertyName("database-settings")]
 		public DatabaseSettings DatabaseSettings { get; set; } = new DatabaseSettings();
@@ -18,10 +18,10 @@ namespace K4RPG
 		public ExperienceEarningSettings ExperienceEarningSettings { get; set; } = new ExperienceEarningSettings();
 
 		[JsonPropertyName("ConfigVersion")]
-		public override int Version { get; set; } = 1;
+		public override int Version { get; set; } = 2;
 	}
 
-	public sealed class CommandSettings
+	public class CommandSettings
 	{
 		[JsonPropertyName("info-commands")]
 		public List<string> InfoCommands { get; set; } = new List<string> { "exp", "xp", "experience", "rpg" };
@@ -30,25 +30,25 @@ namespace K4RPG
 		public List<string> SkillCommands { get; set; } = new List<string> { "skill", "skills" };
 	}
 
-	public sealed class LevelSettings
+	public class LevelSettings
 	{
 		[JsonPropertyName("base-experience")]
-		public int BaseExperience = 20;
+		public int BaseExperience { get; set; } = 20;
 
 		[JsonPropertyName("experience-multiplier")]
-		public float ExperienceMultiplier = 1.15f;
+		public float ExperienceMultiplier { get; set; } = 1.15f;
 
 		[JsonPropertyName("max-level")]
-		public int MaxLevel = 100;
+		public int MaxLevel { get; set; } = 100;
 
 		[JsonPropertyName("initial-skillpoints")]
-		public int InitialSkillpoints = 0;
+		public int InitialSkillpoints { get; set; } = 0;
 
 		[JsonPropertyName("skillpoints-per-level")]
-		public int SkillpointsPerLevel = 1;
+		public int SkillpointsPerLevel { get; set; } = 1;
 	}
 
-	public sealed class DatabaseSettings
+	public class DatabaseSettings
 	{
 		[JsonPropertyName("host")]
 		public string Host { get; set; } = "localhost";
@@ -75,7 +75,7 @@ namespace K4RPG
 		public int TablePurgeDays { get; set; } = 30;
 	}
 
-	public sealed class ExperienceEarningSettings
+	public class ExperienceEarningSettings
 	{
 		[JsonPropertyName("round-mvp")]
 		public int EventRoundMvp { get; set; } = 1;

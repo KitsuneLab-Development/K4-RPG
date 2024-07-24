@@ -90,7 +90,9 @@ public sealed partial class Plugin : BasePlugin
 
 	public void LoadAllPlayersDataAsync()
 	{
-		Utilities.GetPlayers().Where(p => p.IsValid && !p.IsBot && !p.IsHLTV && p.Connected == PlayerConnectedState.PlayerConnected).ToList().ForEach(p =>
+		var validPlayers = Utilities.GetPlayers().Where(p => p.IsValid && !p.IsBot && !p.IsHLTV && p.Connected == PlayerConnectedState.PlayerConnected).ToList();
+
+		validPlayers.ForEach(p =>
 		{
 			RPGPlayer newPlayer = new RPGPlayer(this, p);
 			RPGPlayers.Add(newPlayer);
@@ -100,25 +102,6 @@ public sealed partial class Plugin : BasePlugin
 			return;
 
 		string tablePrefix = Config.DatabaseSettings.TablePrefix;
-		string query = @$"
-        INSERT INTO `{tablePrefix}k4-rpg_players` (`SteamID`, `LastSeen`)
-        SELECT @SteamID, CURRENT_TIMESTAMP
-        FROM DUAL
-        WHERE NOT EXISTS (
-            SELECT 1
-            FROM `{tablePrefix}k4-rpg_players`
-            WHERE `SteamID` = @SteamID
-        );
-
-        SELECT
-            p.`SteamID`,
-            p.`Experience`,
-            p.`SkillPoints`,
-            s.`SkillID`,
-            s.`Level`
-        FROM `{tablePrefix}k4-rpg_players` p
-        LEFT JOIN `{tablePrefix}k4-rpg_playerskills` s ON p.`SteamID` = s.`PlayerSteamID`
-        WHERE p.`SteamID` IN ({string.Join(",", RPGPlayers.Select(p => p.SteamID))});";
 
 		Task.Run(async () =>
 		{
@@ -127,7 +110,33 @@ public sealed partial class Plugin : BasePlugin
 
 			try
 			{
-				var players = (await connection.QueryAsync<dynamic, dynamic, RPGPlayer>(query, (player, skill) =>
+				foreach (var rpgPlayer in RPGPlayers)
+				{
+					string insertQuery = @$"
+					INSERT INTO `{tablePrefix}k4-rpg_players` (`SteamID`, `LastSeen`, `SkillPoints`)
+					SELECT @SteamID, CURRENT_TIMESTAMP, {Config.LevelSettings.InitialSkillpoints}
+					FROM DUAL
+					WHERE NOT EXISTS (
+						SELECT 1
+						FROM `{tablePrefix}k4-rpg_players`
+						WHERE `SteamID` = @SteamID
+					);";
+
+					await connection.ExecuteAsync(insertQuery, new { SteamID = rpgPlayer.SteamID });
+				}
+
+				string selectQuery = @$"
+            SELECT
+                p.`SteamID`,
+                p.`Experience`,
+                p.`SkillPoints`,
+                s.`SkillID`,
+                s.`Level`
+            FROM `{tablePrefix}k4-rpg_players` p
+            LEFT JOIN `{tablePrefix}k4-rpg_playerskills` s ON p.`SteamID` = s.`PlayerSteamID`
+            WHERE p.`SteamID` IN ({string.Join(",", RPGPlayers.Select(p => $"'{p.SteamID}'"))});";
+
+				var players = (await connection.QueryAsync<dynamic, dynamic, RPGPlayer>(selectQuery, (player, skill) =>
 				{
 					RPGPlayer? cPlayer = RPGPlayers.Find(p => p.SteamID == player.SteamID);
 					if (cPlayer != null)
@@ -143,7 +152,9 @@ public sealed partial class Plugin : BasePlugin
 								cPlayer.Skills.Add(rpgSkill.ID, skill.Level);
 							}
 							else
+							{
 								Server.NextWorldUpdate(() => Logger.LogError($"Failed to load skill data for skill ID {skill.SkillID} due to missing skill."));
+							}
 						}
 					}
 					if (cPlayer != null)
@@ -151,8 +162,11 @@ public sealed partial class Plugin : BasePlugin
 						return cPlayer;
 					}
 					else
+					{
 						throw new Exception("Failed to find RPGPlayer with the specified SteamID.");
+					}
 				}, splitOn: "SkillID")).ToList();
+
 				RPGPlayers = players.Where(p => p != null).ToList();
 			}
 			catch (Exception ex)

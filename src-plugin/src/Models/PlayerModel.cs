@@ -76,18 +76,24 @@ public class RPGPlayer
 		string tablePrefix = Plugin.Config.DatabaseSettings.TablePrefix;
 
 		string insertOrUpdateQuery = @$"
-        INSERT INTO `{tablePrefix}k4-rpg_players` (`SteamID`, `Level`, `LastSeen`)
-        VALUES (@SteamID, 1, CURRENT_TIMESTAMP)
+        INSERT INTO `{tablePrefix}k4-rpg_players` (`SteamID`, `LastSeen`, `SkillPoints`)
+        VALUES (@SteamID, CURRENT_TIMESTAMP, {Plugin.Config.LevelSettings.InitialSkillpoints})
         ON DUPLICATE KEY UPDATE
             `LastSeen` = CURRENT_TIMESTAMP;";
 
-		await connection.ExecuteAsync(insertOrUpdateQuery, new { SteamID });
+		var affectedRows = await connection.ExecuteAsync(insertOrUpdateQuery, new { SteamID });
 
 		try
 		{
-			var player = await connection.QueryFirstAsync<PlayerDbData>(
+			var player = await connection.QueryFirstOrDefaultAsync<PlayerDbData>(
 				@$"SELECT Experience, SkillPoints FROM `{tablePrefix}k4-rpg_players` WHERE `SteamID` = @SteamID",
 				new { SteamID });
+
+			if (player == null)
+			{
+				Plugin.Logger.LogError($"Player data not found for SteamID: {SteamID}");
+				return;
+			}
 
 			var skills = (await connection.QueryAsync<SkillDbData>(
 				@$"SELECT `SkillID`, `Level` FROM `{tablePrefix}k4-rpg_playerskills` WHERE `PlayerSteamID` = @SteamID",
