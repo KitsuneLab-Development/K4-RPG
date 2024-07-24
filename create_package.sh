@@ -17,7 +17,10 @@ for dir in modules/*/; do
   cp -r "$dir/src/bin/$subfolder/"* "package/modules/$subfolder/"
 done
 
-# Step 4: Create the package
+# Step 4: Remove Mac hidden files
+find package -name ".DS_Store" -delete
+
+# Step 5: Create the package
 cd package
 zip -r K4-RPG-Package.zip core modules
 
