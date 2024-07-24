@@ -8,7 +8,7 @@ namespace K4RPG
 
         public override string ModuleDescription => "A modular RPG system for Counter-Strike2";
 
-        public override string ModuleAuthor => "K4ryuu";
+        public override string ModuleAuthor => "K4ryuu @ KitsuneLab";
 
         public override string ModuleVersion => "1.0.3 " +
 #if RELEASE
