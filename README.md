@@ -13,7 +13,7 @@
   <a href="https://github.com/KitsuneLab-Development/K4-RPG">
     <img src="https://i.imgur.com/sej1ZzD.png" alt="Logo" width="400" height="256">
   </a>
-  <h3 align="center">K4-RPG</h3>
+  <h3 align="center">CounterStrike2 | K4-RPG</h3>
   <p align="center">
     A modular RPG like plugin for CounterStrike 2 that supports gaining experience and upgrading skills for players.
     <br />
