@@ -1,0 +1,24 @@
+{
+  "k4.general.prefix": "{silver}[ {lime}K4-RPG {silver}]",
+
+  "k4.general.command.clientonly": "{lightred}Ta komenda może być użyta tylko przez klientów.",
+  "k4.general.command.help": "{silver}Oczekiwane użycie: {lime}!{0} {1}",
+  "k4.general.command.noperm": "{lightred}Nie masz uprawnień do użycia tej komendy.",
+  "k4.general.command.serveronly": "{lightred}Ta komenda może być użyta tylko przez serwer.",
+
+  "k4.chat.information": "{silver}Obecny poziom: {lime}{0}{silver} | Doświadczenie: {lime}{1}{silver} / {lime}{2}{silver} | Punkty Umiejętności: {lime}{3}",
+  "k4.chat.levelup": "{silver}Awansowałeś na poziom {lime}{0}{silver}! Następny poziom przy {lime}{1}{silver} doświadczenia.",
+  "k4.chat.experience.earnt": "{silver}Zdobyłeś {lime}{0} {silver}doświadczenia w tej rundzie.",
+
+  "k4.chat.upgrade.success": "{silver}Pomyślnie ulepszyłeś umiejętność {lime}{0}{silver} do poziomu {lime}{1}{silver}.",
+
+  "k4.menu.title": "{lime}Umiejętności K4-RPG",
+  "k4.menu.informations": "{orange}Informacje",
+  "k4.menu.upgrade": "{orange}Ulepsz ({lime}{0} punktów{orange})",
+
+  "k4.skill.name": "- {lime}Nazwa: {white}{0}",
+  "k4.skill.description": "- {lime}Opis: {white}{0}",
+  "k4.skill.level": "- {lime}Poziom: {white}{0}/{1}",
+  "k4.skill.viponly": "- {lime}Tylko dla VIP: {white}{0}",
+  "k4.skill.fromlevel": "- {lime}Od poziomu: {white}{0}"
+}
